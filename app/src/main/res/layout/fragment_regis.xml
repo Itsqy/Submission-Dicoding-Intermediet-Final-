@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primaryColor"
+    tools:context=".register.RegisFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/tv_welcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:fontFamily="@font/poppins_ligth"
+            android:text="New Account"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="50sp"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.rifqi.testpaging3.customview.CustomEmailEditText
+            android:id="@+id/edt_email_regis"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="42dp"
+            android:hint="@string/email"
+            app:layout_constraintEnd_toEndOf="@id/tv_welcome"
+            app:layout_constraintStart_toStartOf="@id/tv_welcome"
+            app:layout_constraintTop_toBottomOf="@id/tv_welcome" />
+
+
+        <EditText
+            android:id="@+id/edt_name_regis"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:hint="@string/username"
+            app:layout_constraintEnd_toEndOf="@id/edt_email_regis"
+            app:layout_constraintStart_toStartOf="@id/edt_email_regis"
+            app:layout_constraintTop_toBottomOf="@id/edt_email_regis" />
+
+        <com.rifqi.testpaging3.customview.CustomPasswordEditText
+            android:id="@+id/edt_pass_regis"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:hint="password"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="@id/edt_name_regis"
+            app:layout_constraintStart_toStartOf="@id/edt_name_regis"
+            app:layout_constraintTop_toBottomOf="@id/edt_name_regis" />
+
+        <com.rifqi.testpaging3.customview.CustomLoginButton
+            android:id="@+id/btn_regis"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:enabled="false"
+            app:layout_constraintEnd_toEndOf="@id/edt_pass_regis"
+            app:layout_constraintStart_toStartOf="@id/edt_pass_regis"
+            app:layout_constraintTop_toBottomOf="@id/edt_pass_regis"
+
+            />
+
+
+        <TextView
+            android:id="@+id/tv_tosignin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/have_an_account"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/btn_regis"
+            app:layout_constraintStart_toStartOf="@id/btn_regis"
+            app:layout_constraintTop_toBottomOf="@id/btn_regis" />
+
+        <ProgressBar
+            android:id="@+id/pb_regis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/edt_pass_regis" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

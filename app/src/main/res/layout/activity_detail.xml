@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".detail.DetailActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/img_story"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_launcher_background"
+                android:transitionName="image"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_title_story"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/kebakaran_pada_hutan"
+                android:textSize="22sp"
+                android:layout_marginStart="23dp"
+                android:layout_marginTop="23dp"
+                android:transitionName="title"
+                app:layout_constraintTop_toBottomOf="@id/img_story" />
+
+            <TextView
+                android:id="@+id/tv_desc_story"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLength="50"
+                android:layout_marginStart="23dp"
+                android:layout_marginTop="23dp"
+                android:text="@string/description_story"
+                android:transitionName="description"
+                app:layout_constraintTop_toBottomOf="@id/tv_title_story" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

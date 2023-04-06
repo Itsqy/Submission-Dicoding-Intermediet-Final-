@@ -1,0 +1,21 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.SubmissionIntermedieteDicoding.AppWidget.Container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@style/Theme.SubmissionIntermedieteDicoding.AppWidgetContainer">
+
+    <androidx.recyclerview.widget.RecyclerView
+        tools:listitem="@layout/item_row_story"
+        android:id="@+id/appwidget_text"
+        style="@style/Widget.SubmissionIntermedieteDicoding.AppWidget.InnerView"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="8dp"
+        android:contentDescription="@string/appwidget_text"
+        android:text="@string/appwidget_text"
+        android:textSize="24sp"
+        android:textStyle="bold|italic" />
+</RelativeLayout>

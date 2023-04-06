@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Story</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcome">Welcome</string>
+    <string name="sign_up">Sign up</string>
+    <string name="kebakaran_pada_hutan">Kebakaran pada hutan</string>
+    <string name="description_story">PROBOLINGGO – Berdasarkan informasi dan laporan dari Taman Nasional Bromo Tengger Semeru bahwa telah terjadi kebakaran lahan di Kawasan Gunung Bromo pada hari Senin, 11 September 2017 sebanyak 3 titik yakni di lereng B29, Kawasan Savana (Bukit Teletubies) dan Lereng dingklik, Pananjakan. “Awal mula titik api muncul sekitar pukul 10.45 WIB yang teridentifikasi berasal dari terbakarnya ilalang Savana tepat di bawah Bukit B29” Ujar salah seorang Wisatawan yang sedang berkunjung. Segera melaporkan kepada petugas TNBTS (Taman Nasional Bromo Tengger Semeru) yang saat itu tengah bertugas di Pos Cemoro Lawang. Setelah menerima laporan adanya kejadian kebakaran tersebut, pihak TNBTS segera menghubungi instansi terkait. Pemadaman dilaksanakan oleh beberapa personil meliputi 6 personil dari Polsek Sukapura; 6 personil dari Koramil Sukapura; 4 personil dari Sat Sabhara Polres Probolinggo; 4 personil dari BPBD Kabupaten Probolinggo; 14 personil dari TNBTS; serta 16 personil Sahabat Bromo. Pemadaman dilakukan secara tradisional dengan “menggepyok” atau memukul api dengan batang atau semak belukar. “Api cepat menjalar disebabkan karena kondisi arah angin yang berubah ubah dan cuaca yang panas dan kering, tindakan darurat yang dapat kami lakukan pada saat itu adalah dengan membuat sekat pembatas dengan menyiramkan pasir pada area yang belum terbakar. Kami memadamkan api secara manual dengan menyiramkan air pada titik api oleh Damkar TNBTS, dan menyiagakan personil di Pos pantau Cemoro Lawang, serta menyiagakan juga Damkar cadangan dari Balai Besar TNBTS Malang.” Kata Heri Personil TRC BPBD Kabupaten Probolinggo</string>
+    <string name="tokenApi">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1c2VyLXZFcXlraEk5VzdtaXA5UU8iLCJpYXQiOjE2NzkyODEzOTV9.fFtpCDOhdfwrkna5dm39CKe5z58SCMQVZWRBQgi6C9w</string>
+    <string name="gallery">Gallery</string>
+    <string name="camera">Camera</string>
+    <string name="tokenlogin">Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1c2VyLXZFcXlraEk5VzdtaXA5UU8iLCJpYXQiOjE2NzkyODEzOTV9.fFtpCDOhdfwrkna5dm39CKe5z58SCMQVZWRBQgi6C9w</string>
+    <string name="add_story">add story</string>
+    <string name="welcome_guest">Halo Rifqi Selamat Datang</string>
+    <string name="opening">Silahkan baca Cerita yang tersedia !!</string>
+    <string name="fill_the_description">Fill The Description</string>
+    <string name="upload">upload</string>
+    <string name="dont_have_account_sign_up">Dont Have Account? Sign Up</string>
+    <string name="password">password</string>
+    <string name="username">username</string>
+    <string name="have_an_account">Have an Account? Sign In</string>
+    <string name="email">email</string>
+    <string name="sign_in">sign in</string>
+    <string name="format">\"please fill with valid format \"</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
+    <string name="title_activity_gmaps">GMapsActivity</string>
+</resources>

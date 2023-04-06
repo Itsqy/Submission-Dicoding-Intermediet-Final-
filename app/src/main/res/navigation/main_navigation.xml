@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/splashFragment">
+
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.rifqi.testpaging3.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_regisFragment"
+            app:destination="@id/regisFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_in_left" />
+        <action
+            android:id="@+id/action_loginFragment_to_menuActivity"
+            app:destination="@id/menuActivity"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/menuActivity"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/regisFragment"
+        android:name="com.rifqi.testpaging3.register.RegisFragment"
+        android:label="fragment_regis"
+        tools:layout="@layout/fragment_regis" >
+        <action
+            android:id="@+id/action_regisFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/slide_out_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popUpTo="@id/loginFragment" />
+        <action
+            android:id="@+id/action_regisFragment_to_menuActivity"
+            app:destination="@id/menuActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/menuActivity"
+        android:name="com.rifqi.testpaging3.menu.MenuActivity"
+        android:label="activity_menu"
+        tools:layout="@layout/activity_menu" />
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.rifqi.testpaging3.SplashFragment"
+        android:label="fragment_splash2"
+        tools:layout="@layout/fragment_splash2" >
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_menuActivity"
+            app:destination="@id/menuActivity"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/menuActivity"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+</navigation>
