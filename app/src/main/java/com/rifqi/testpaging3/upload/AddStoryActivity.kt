@@ -234,10 +234,10 @@ class AddStoryActivity : AppCompatActivity() {
 
             getFile = myFile
             result =
-//                rotateBitmap(
-                    BitmapFactory.decodeFile(getFile?.path)
-//                    isBackCamera
-//                )
+                rotateBitmap(
+                    BitmapFactory.decodeFile(getFile?.path),
+                    isBackCamera
+                )
 
 
         }

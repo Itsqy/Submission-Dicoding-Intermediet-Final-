@@ -13,8 +13,6 @@ class AuthViewModel(private val userPrefferences: UserPrefferences) : ViewModel(
         return userPrefferences.getUser().asLiveData()
     }
 
-
-
     fun logOut() = viewModelScope.launch {userPrefferences.logout()}
 
 

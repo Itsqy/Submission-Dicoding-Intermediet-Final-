@@ -22,15 +22,8 @@ class MenuActivity : AppCompatActivity() {
 
     private val storyViewModel: StoryViewModel by viewModels() {
         StoryViewModelFactory(
-            applicationContext,
-            tokexn()
+            applicationContext
         )
-    }
-
-    private fun tokexn(): String {
-        val bundle = intent.extras
-        val token = bundle?.getString("tokenUser")
-        return token.toString()
     }
 
     private val authViewModel: AuthViewModel by viewModels() {
@@ -43,20 +36,27 @@ class MenuActivity : AppCompatActivity() {
         setContentView(binding.root)
         storyAdapter = StoryAdapter()
 
-        val bundle = intent.extras
-        val name = bundle?.getString("nameUser")
-        binding.tvWelcomeUser.text = "Halo $name , Selamat Datang !"
+
 
 
         binding?.apply {
 
             rvStory.layoutManager = LinearLayoutManager(this@MenuActivity)
             rvStory.adapter = storyAdapter
+            rvStory.adapter = storyAdapter.withLoadStateFooter(
+                footer = LoadingStateAdapter {
+                    storyAdapter.retry()
+                }
+            )
 
 
-            storyViewModel.stories.observe(this@MenuActivity) { story ->
-                Log.d("valueAPI", story.toString())
-                storyAdapter.submitData(lifecycle, story)
+
+            authViewModel.getUser().observe(this@MenuActivity) {
+                storyViewModel.stories(it.userToken).observe(this@MenuActivity) { story ->
+                    Log.d("valueAPI", story.toString())
+                    storyAdapter.submitData(lifecycle, story)
+                }
+                binding.tvWelcomeUser.text = "Halo ${it.userName} , Selamat Datang !"
             }
         }
 
@@ -70,22 +70,6 @@ class MenuActivity : AppCompatActivity() {
     }
 
 
-//    fun showLoading() {
-//        binding?.apply {
-//            menuViewModel.loading.observe(this@MenuActivity) { isLoading ->
-//                if (isLoading) {
-//                    pbMenu.visibility = View.VISIBLE
-//                    rvStory.visibility = View.INVISIBLE
-//                } else {
-//                    pbMenu.visibility = View.INVISIBLE
-//                    rvStory.visibility = View.VISIBLE
-//                }
-//
-//            }
-//        }
-//    }
-
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.option_menu, menu)
@@ -96,7 +80,6 @@ class MenuActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.mapsStory -> {
                 startActivity(Intent(this, GMapsActivity::class.java))
-                finish()
                 return true
             }
             R.id.logOut -> {
@@ -107,6 +90,11 @@ class MenuActivity : AppCompatActivity() {
             }
             else -> return true
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        storyAdapter.retry()
     }
 
     override fun onBackPressed() {

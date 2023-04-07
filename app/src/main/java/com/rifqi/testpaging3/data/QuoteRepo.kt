@@ -9,10 +9,10 @@ import com.rifqi.testpaging3.network.ApiService
 class QuoteRepository(
     private val quoteDatabase: QuoteDatabase,
     private val apiService: ApiService,
-    val token: String
-) {
 
-    fun getQuote(): LiveData<PagingData<ListStoryData>> {
+    ) {
+
+    fun getQuote(token: String): LiveData<PagingData<ListStoryData>> {
         @OptIn(ExperimentalPagingApi::class)
         return Pager(
             config = PagingConfig(

@@ -1,6 +1,5 @@
 package com.rifqi.testpaging3
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.rifqi.testpaging3.databinding.FragmentSplash2Binding
 import com.rifqi.testpaging3.login.dataStore
-import com.rifqi.testpaging3.menu.MenuActivity
 
 
 class SplashFragment : Fragment() {
@@ -35,18 +34,13 @@ class SplashFragment : Fragment() {
             if (it.userLogin) {
                 Thread(Runnable {
                     try {
-                        Thread.sleep(2000)
+                        Thread.sleep(1500)
                     } catch (e: InterruptedException) {
                         e.printStackTrace()
                     }
                     activity?.runOnUiThread {
 
-                        val intent = Intent(activity, MenuActivity::class.java)
-                        val mBundle = Bundle()
-                        mBundle.putString("tokenUser", it.userToken)
-                        mBundle.putString("nameUser", it.userName)
-                        intent.putExtras(mBundle)
-                        startActivity(intent)
+                        findNavController().navigate(R.id.action_splashFragment_to_menuActivity)
 
 
                         activity?.finish()
@@ -54,19 +48,17 @@ class SplashFragment : Fragment() {
                     }
                 }).start()
             } else {
-                Thread(Runnable {
-                    try {
-                        Thread.sleep(2000)
-                    } catch (e: InterruptedException) {
-                        e.printStackTrace()
-                    }
-                    activity?.runOnUiThread {
-                        view.findNavController()
-                            .navigate(R.id.action_splashFragment_to_loginFragment)
+                try {
+                    Thread.sleep(1500)
+                } catch (e: InterruptedException) {
+                    e.printStackTrace()
+                }
+                activity?.runOnUiThread {
+                    view.findNavController()
+                        .navigate(R.id.action_splashFragment_to_loginFragment)
 
 
-                    }
-                }).start()
+                }
             }
         }
 

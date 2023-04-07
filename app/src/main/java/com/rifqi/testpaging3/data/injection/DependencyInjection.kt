@@ -6,9 +6,9 @@ import com.rifqi.testpaging3.data.local.QuoteDatabase
 import com.rifqi.testpaging3.network.ApiConfig
 
 object DependencyInjection {
-    fun parameterStory(context: Context, tokenUser: String): QuoteRepository {
+    fun parameterStory(context: Context): QuoteRepository {
         val db = QuoteDatabase.getDatabase(context)
         val service = ApiConfig.getService()
-        return QuoteRepository(db, service, tokenUser)
+        return QuoteRepository(db, service)
     }
 }

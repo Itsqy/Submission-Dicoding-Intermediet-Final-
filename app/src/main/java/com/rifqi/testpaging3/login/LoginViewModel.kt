@@ -1,5 +1,6 @@
 package com.rifqi.testpaging3.login
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -36,17 +37,24 @@ class LoginViewModel(val sharedPref: UserPrefferences) : ViewModel() {
                     response: Response<LoginResponse>
                 ) {
                     if (response.isSuccessful) {
-                        _isLoading.value = false
-                        _showMessage.value = response.body()?.message
-                        _isError.value = response.body()?.error.toString()
-                        val body = response.body()?.loginResult
-                        val dataUser = UserModel(
-                            body?.name.toString(),
-                            body?.userId.toString(),
-                            body?.token.toString(),
-                            true
-                        )
-                        saveUser(dataUser)
+                        if (response != null) {
+                            _isLoading.value = false
+                            _showMessage.value = response.body()?.message
+                            _isError.value = response.body()?.error.toString()
+                            val body = response.body()?.loginResult
+                            val dataUser = UserModel(
+                                body?.name.toString(),
+                                body?.userId.toString(),
+                                body?.token.toString(),
+                                true
+                            )
+                           val save =  saveUser(dataUser)
+                            Log.d("saveUser", "onResponse: $dataUser")
+                        } else {
+                            _isLoading.value = false
+                            _showMessage.value = response.body()?.message
+                            _isError.value = response.body()?.error.toString()
+                        }
 
 
                     } else {

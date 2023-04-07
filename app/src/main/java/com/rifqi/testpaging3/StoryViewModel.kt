@@ -8,8 +8,13 @@ import androidx.paging.cachedIn
 import com.rifqi.testpaging3.data.QuoteRepository
 import com.rifqi.testpaging3.data.remote.ListStoryData
 
-class StoryViewModel(quoteRepository: QuoteRepository) :ViewModel(){
+class StoryViewModel(private val quoteRepository: QuoteRepository) : ViewModel() {
 
-    val stories: LiveData<PagingData<ListStoryData>> =
-        quoteRepository.getQuote().cachedIn(viewModelScope)
+    fun stories(token: String): LiveData<PagingData<ListStoryData>> {
+        return quoteRepository.getQuote(token).cachedIn(viewModelScope)
+    }
+
+
+
+
 }
