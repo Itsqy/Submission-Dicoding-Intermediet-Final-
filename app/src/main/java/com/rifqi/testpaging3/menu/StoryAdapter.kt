@@ -45,7 +45,9 @@ class StoryAdapter : PagingDataAdapter<ListStoryData, StoryAdapter.MyViewHolder>
 
         fun bind(story: ListStoryData) {
 
-            Glide.with(itemView.context).load(story.photoUrl).apply(
+            Glide.with(itemView.context)
+                .load(story.photoUrl)
+                .apply(
                 RequestOptions().diskCacheStrategy(
                     DiskCacheStrategy.AUTOMATIC
                 )

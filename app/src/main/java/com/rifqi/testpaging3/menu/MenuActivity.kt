@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,6 +26,8 @@ class MenuActivity : AppCompatActivity() {
             applicationContext
         )
     }
+
+    private val menuViewModel: MenuViewModel by viewModels()
 
     private val authViewModel: AuthViewModel by viewModels() {
         ViewModelFactory(UserPrefferences.getInstance(dataStore))
@@ -66,9 +69,23 @@ class MenuActivity : AppCompatActivity() {
             finish()
         }
 
-
+        showLoading()
     }
 
+    fun showLoading() {
+        binding?.apply {
+            menuViewModel.loading.observe(this@MenuActivity) { isLoading ->
+                if (isLoading) {
+                    pbMenu.visibility = View.VISIBLE
+                    rvStory.visibility = View.INVISIBLE
+                } else {
+                    pbMenu.visibility = View.INVISIBLE
+                    rvStory.visibility = View.VISIBLE
+                }
+
+            }
+        }
+    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater

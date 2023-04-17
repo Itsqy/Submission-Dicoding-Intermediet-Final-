@@ -33,22 +33,25 @@
 
         <Button
             android:id="@+id/btn_gallery"
-            android:layout_width="150dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="23dp"
             android:background="@drawable/bg_radius"
             android:text="@string/gallery"
-            app:layout_constraintStart_toStartOf="@id/iv_camera_preview"
+            app:layout_constraintEnd_toStartOf="@id/btn_camera"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_camera_preview" />
 
         <Button
             android:id="@+id/btn_camera"
-            android:layout_width="150dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="42dp"
             android:background="@drawable/bg_radius"
             android:text="@string/camera"
+            app:layout_constraintEnd_toEndOf="parent"
+
             app:layout_constraintStart_toEndOf="@id/btn_gallery"
             app:layout_constraintTop_toTopOf="@id/btn_gallery" />
 

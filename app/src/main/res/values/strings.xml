@@ -27,4 +27,6 @@
     <string name="app_widget_description">This is an app widget description</string>
     <string name="title_activity_gmaps">GMapsActivity</string>
     <string name="retry">"retry "</string>
+    <string name="not_given_permission">Tidak mendapatkan Izin untuk memulai Kamera</string>
+    <string name="input_file_first">silahkan masukan berkas terlebih dahulu</string>
 </resources>

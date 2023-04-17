@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
@@ -16,7 +15,6 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.rifqi.testpaging3.R
-
 import com.rifqi.testpaging3.databinding.ActivityCameraXactivityBinding
 import com.rifqi.testpaging3.upload.AddStoryActivity.Companion.CAMERA_X_RESULT
 import java.io.File
@@ -93,6 +91,14 @@ class CameraXActivity : AppCompatActivity() {
             outputOption,
             ContextCompat.getMainExecutor(this),
             object : ImageCapture.OnImageSavedCallback {
+                override fun onError(exception: ImageCaptureException) {
+                    Toast.makeText(
+                        this@CameraXActivity,
+                        "Gagar menggambil Gambar",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                     val intent = Intent()
                     intent.putExtra("picture", photoFile)
@@ -100,23 +106,15 @@ class CameraXActivity : AppCompatActivity() {
                         "isBackCamera",
                         cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA
                     )
-                    Log.d("errorCamera", intent.toString())
-                    setResult(CAMERA_X_RESULT,intent)
+
+                    setResult(CAMERA_X_RESULT, intent)
                     finish()
                 }
 
-                override fun onError(exception: ImageCaptureException) {
-                    Toast.makeText(
-                        this@CameraXActivity,
-                        "Gagar menggambil Gambar",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    Log.d("errorCamera", exception.toString())
-                }
+
             })
 
     }
-
 
 
     fun createFile(application: Application): File {

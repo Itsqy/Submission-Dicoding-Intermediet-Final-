@@ -10,6 +10,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.view.View
@@ -21,6 +22,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
 import com.rifqi.testpaging3.AuthViewModel
+import com.rifqi.testpaging3.R
 import com.rifqi.testpaging3.UserPrefferences
 import com.rifqi.testpaging3.ViewModelFactory
 import com.rifqi.testpaging3.databinding.ActivityAddStoryBinding
@@ -41,7 +43,7 @@ class AddStoryActivity : AppCompatActivity() {
         "dd-MMM-yyyy",
         Locale.US
     ).format(System.currentTimeMillis())
-    private var result: Bitmap? = null
+
     private val authViewModel: AuthViewModel by viewModels() {
         ViewModelFactory(UserPrefferences.getInstance(dataStore))
     }
@@ -62,7 +64,7 @@ class AddStoryActivity : AppCompatActivity() {
         if (!allPermissionsGranted()) {
             Toast.makeText(
                 this,
-                "Tidak mendapatkan Izin untuk memulai Kamera",
+                getString(R.string.not_given_permission),
                 Toast.LENGTH_SHORT
             ).show()
             finish()
@@ -125,6 +127,7 @@ class AddStoryActivity : AppCompatActivity() {
                     edtAddStory.error = "please fill the description"
                 } else {
                     val file = reduceFileImage(getFile as File)
+
                     val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
                     val imageMulti: MultipartBody.Part =
                         MultipartBody.Part.createFormData("photo", file.name, requestImageFile)
@@ -155,7 +158,7 @@ class AddStoryActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(
                     this@AddStoryActivity,
-                    "silahkan masukan berkas terlebih dahulu",
+                    getString(R.string.input_file_first),
                     Toast.LENGTH_SHORT
                 ).show()
 
@@ -184,6 +187,7 @@ class AddStoryActivity : AppCompatActivity() {
             compressQuality -= 5
         } while (streamLength > 1000000)
         bitmap.compress(Bitmap.CompressFormat.JPEG, compressQuality, FileOutputStream(file))
+
         return file
     }
 
@@ -194,6 +198,9 @@ class AddStoryActivity : AppCompatActivity() {
             val selectedImg: Uri = it.data?.data as Uri
             val myFile = uriToFile(selectedImg, this@AddStoryActivity)
             getFile = myFile
+
+
+
             binding.ivCameraPreview.setImageURI(selectedImg)
         }
     }
@@ -229,49 +236,39 @@ class AddStoryActivity : AppCompatActivity() {
         ActivityResultContracts.StartActivityForResult()
     ) {
         if (it.resultCode == CAMERA_X_RESULT) {
-            val myFile = it.data?.getSerializableExtra("picture") as File
+            val myFile = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                it.data?.getSerializableExtra("picture", File::class.java)
+            } else {
+                @Suppress("DEPRECATION")
+                it.data?.getSerializableExtra("picture")
+            } as File
             val isBackCamera = it.data?.getBooleanExtra("isBackCamera", true) as Boolean
 
-            getFile = myFile
-            result =
-                rotateBitmap(
-                    BitmapFactory.decodeFile(getFile?.path),
-                    isBackCamera
-                )
-
+//            getFile = myFile
+//            result = rotateBitmap(BitmapFactory.decodeFile(getFile?.path), isBackCamera)
+            myFile.let { file ->
+                rotateFile(file, isBackCamera)
+                getFile = file
+                binding.ivCameraPreview.setImageBitmap(BitmapFactory.decodeFile(getFile?.path))
+            }
 
         }
-        binding.ivCameraPreview.setImageBitmap(result)
+
+
     }
 
-    fun rotateBitmap(bitmap: Bitmap, isBackCamera: Boolean = false): Bitmap {
+    fun rotateFile(file: File, isBackCamera: Boolean = false) {
         val matrix = Matrix()
-        return if (isBackCamera) {
-            matrix.postRotate(90f)
-            Bitmap.createBitmap(
-                bitmap,
-                0,
-                0,
-                bitmap.width,
-                bitmap.height,
-                matrix,
-                true
-            )
-        } else {
-            matrix.postRotate(-90f)
-            matrix.postScale(-1f, 1f, bitmap.width / 2f, bitmap.height / 2f)  // flip gambar
-            Bitmap.createBitmap(
-                bitmap,
-                0,
-                0,
-                bitmap.width,
-                bitmap.height,
-                matrix,
-                true
-            )
+        val bitmap = BitmapFactory.decodeFile(file.path)
+        val rotation = if (isBackCamera) 90f else -90f
+        matrix.postRotate(rotation)
+        if (!isBackCamera) {
+            matrix.postScale(-1f, 1f, bitmap.width / 2f, bitmap.height / 2f)
         }
-
+        val result = Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
+        result.compress(Bitmap.CompressFormat.JPEG, 100, FileOutputStream(file))
     }
+
 
     override fun onDestroy() {
         super.onDestroy()

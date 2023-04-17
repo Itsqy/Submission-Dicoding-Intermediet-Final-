@@ -45,7 +45,9 @@ class StoryViewModelTest {
 
         Mockito.`when`(quoteRepository.getQuote("tokenUser")).thenReturn(expectedQuote)
         val storyViewModel = StoryViewModel(quoteRepository)
-        val actualStories: PagingData<ListStoryData> = storyViewModel.stories("tokenUser").getOrAwaitValue()
+        val actualStories: PagingData<ListStoryData> =
+            storyViewModel.stories("tokenUser").getOrAwaitValue()
+
 
 
 
@@ -60,8 +62,27 @@ class StoryViewModelTest {
         advanceUntilIdle()
 
         assertNotNull(differ.snapshot())
+
+
         assertEquals(dummyStory.size, differ.snapshot().size)
-        assertEquals(dummyStory[0].name, differ.snapshot()[0]?.name)
+        assertEquals(dummyStory[0], differ.snapshot()[0])
+
+    }
+    @Test
+    fun `when Get Quote Empty Should Return No Data`() = runTest {
+        val data: PagingData<ListStoryData> = PagingData.from(emptyList())
+        val expectedQuote = MutableLiveData<PagingData<ListStoryData>>()
+        expectedQuote.value = data
+        Mockito.`when`(quoteRepository.getQuote("tokenUser")).thenReturn(expectedQuote)
+        val storyViewModel = StoryViewModel(quoteRepository)
+        val actualQuote: PagingData<ListStoryData> = storyViewModel.stories("tokenUser").getOrAwaitValue()
+        val differ = AsyncPagingDataDiffer(
+            diffCallback = StoryAdapter.DIFF_CALLBACK,
+            updateCallback = noopListUpdateCallback,
+            workerDispatcher = Dispatchers.Main,
+        )
+        differ.submitData(actualQuote)
+        assertEquals(0, differ.snapshot().size)
     }
 
 }
