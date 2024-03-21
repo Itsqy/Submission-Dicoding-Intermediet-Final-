@@ -1,10 +1,10 @@
 # Story app 
-NoteApp was developed by me with android studio, using kotlin lang. you can doing CRUD data with easely.
+Story was developed by me with android studio, using kotlin lang. you can doing CRUD data from api , and then store it in Room Database and then show it with paging3  easely .
 
 ## Technology Used
--paging 3
--maps api
--Room database
+- paging 3
+- maps api
+- Room database
 
 ## Screens 
 
